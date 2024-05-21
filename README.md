@@ -9,7 +9,7 @@ Uses UDP packets with TTL (Time to live) values to trace the route to a destinat
   You can run the GeoTracer script to trace the route to a specified domain or IP address. For example:
 
 ```sh
-python geotracer.py
+python Trace.py
 ```
 
 The target site is specified in the script. Modify the site variable in the script to trace a different destination:
