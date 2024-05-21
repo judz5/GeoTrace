@@ -2,7 +2,7 @@
 
 A Python traceroute tool with geolocation.
 
-Uses UDP packets with TTL (Time to live) values to trace the route to a destination address. Location data is pulled from ip-api.com, and visualized on a map. 
+Uses UDP packets with TTL (Time to live) values to trace the route to a destination address. Location data is pulled from ip-api.com, and (*in progess*) visualized on a map. 
 
 ## Usage
 
