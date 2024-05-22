@@ -1,15 +1,66 @@
 import socket
 import requests
+import curses
 
-site = "youtube.com"
 port = 33434
 
+logo = """
+ _____         _____                     
+|   __|___ ___|_   _|___ ___ ___ ___ ___ 
+|  |  | -_| . | | | |  _| .'|  _| -_|  _|
+|_____|___|___| |_| |_| |__,|___|___|_| 
 
-def main():
+"""
+
+
+def print_logo(stdscr):
+    global logo_line
+
+    height, width = stdscr.getmaxyx()
+
+    logo_line = logo.splitlines()
+    for i, line in enumerate(logo_line):
+        stdscr.addstr(2 + i, (width // 2) - (len(line) // 2), line)
+
+    prompt = "Enter URL: "
+    stdscr.addstr(4 + len(logo_line), (width // 2) -
+                  (len(prompt) // 2), prompt)
+
+
+def get_user_url(stdscr):
+    curses.curs_set(1)
+    stdscr.clear()
+
+    height, width = stdscr.getmaxyx()
+
+    print_logo(stdscr)
+
+    prompt = "Enter URL: "
+    stdscr.addstr(4 + len(logo_line), (width // 2) -
+                  (len(prompt) // 2), prompt)
+
+    curses.echo()
+    stdscr.refresh()
+
+    url = stdscr.getstr(5 + len(logo_line), (width // 2) - 10).decode('utf-8')
+    curses.noecho()
+    return url
+
+
+def main(stdscr):
+
+    curses.curs_set(1)
+
+    site = get_user_url(stdscr)
+
+    stdscr.clear()
+
+    print_logo(stdscr)
 
     # Get target IP addr
     dest_ip = socket.gethostbyname(site)
-    print("Tracing to " + dest_ip)
+    stdscr.addstr(2 + len(logo_line), 0, f'Tracing path to : {dest_ip}')
+    stdscr.refresh()
 
     # Creates a UDP Socket for sending out packets
     sent_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -44,9 +95,12 @@ def main():
 
         # print(loc_response)
 
-        print('Hop #' + str(num_hop) + ": " + hopped_ip + ", " + str(loc_data.get("city")) +
-              ", " + str(loc_data.get("region")) + ", " + str(loc_data.get("country")))
+        info = ('Hop #' + str(num_hop) + ": " + hopped_ip + ", " + str(loc_data.get("city")) +
+                ", " + str(loc_data.get("region")) + ", " + str(loc_data.get("country")))
+        stdscr.addstr((2 + len(logo_line)) + num_hop, 0, info)
+        stdscr.refresh()
+
         num_hop += 1
 
 
-main()
+curses.wrapper(main)
