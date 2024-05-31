@@ -12,11 +12,7 @@ Uses UDP packets with TTL (Time to live) values to trace the route to a destinat
 python Trace.py
 ```
 
-The target site is specified in the script. Modify the site variable in the script to trace a different destination:
-
-```python
-site = "docs.python.org"
-```
+  the user is prompted for the target URL via curses. Traceroute output is printed, and a folium map is saved as 'traceMap.html' with a ping at each hopped location.
 
 ## Example Output
 
