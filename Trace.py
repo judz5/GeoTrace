@@ -70,14 +70,15 @@ def main(stdscr):
     receiver = socket.socket(
         socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_ICMP)
     receiver.setsockopt(socket.SOL_IP, socket.IP_HDRINCL, 1)
-    receiver.settimeout(5)
+    receiver.settimeout(10)
 
     hopped_ip = None
+    global num_hop
     num_hop = 1
 
     global cords
     cords = []
-    while hopped_ip != dest_ip:
+    while True:
 
         # print("starting")
 
@@ -125,6 +126,9 @@ def main(stdscr):
 
         num_hop += 1
 
+        if hopped_ip == dest_ip:
+            break
+
 
 curses.wrapper(main)
 
@@ -134,3 +138,5 @@ for lat, lon, hop in cords:
         folium.Marker(location=(lat, lon), popup=f'Hop #{hop}').add_to(pingMap)
 
 pingMap.save("traceMap.html")
+
+print(f'dest found in {num_hop} hops')
