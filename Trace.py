@@ -124,10 +124,10 @@ def main(stdscr):
                           f'Hop #{num_hop}: Request timed out')
             stdscr.refresh()
 
-        num_hop += 1
-
         if hopped_ip == dest_ip:
             break
+
+        num_hop += 1
 
 
 curses.wrapper(main)
@@ -139,4 +139,4 @@ for lat, lon, hop in cords:
 
 pingMap.save("traceMap.html")
 
-print(f'dest found in {num_hop} hops')
+print(f'dest found in {num_hop} hops, at location {cords[-1]}')
