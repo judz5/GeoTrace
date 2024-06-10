@@ -2,6 +2,7 @@ import socket
 import requests
 import curses
 import folium
+from folium.plugins import AntPath
 
 port = 33434
 
@@ -136,6 +137,12 @@ pingMap = folium.Map(zoom_start=5)
 for lat, lon, hop in cords:
     if lat is not None and lon is not None:
         folium.Marker(location=(lat, lon), popup=f'Hop #{hop}').add_to(pingMap)
+
+# ant path for showing order
+lat_lon_list = [(lat, lon) for lat, lon,
+                _ in cords if lat is not None and lon is not None]
+if lat_lon_list:
+    AntPath(lat_lon_list).add_to(pingMap)
 
 pingMap.save("traceMap.html")
 
