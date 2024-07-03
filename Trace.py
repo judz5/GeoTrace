@@ -6,10 +6,11 @@ from folium.plugins import AntPath
 port = 33434
 
 logo = r"""
-  ______ _______  _____  _______  ______ _______ _______ _______
- |  ____ |______ |     |    |    |_____/ |_____| |       |______
- |_____| |______ |_____|    |    |    \_ |     | |_____  |______
-
+ ▄▄ • ▄▄▄ .      ▄▄▄▄▄▄▄▄   ▄▄▄·  ▄▄· ▄▄▄ .
+▐█ ▀ ▪▀▄.▀·▪     •██  ▀▄ █·▐█ ▀█ ▐█ ▌▪▀▄.▀·
+▄█ ▀█▄▐▀▀▪▄ ▄█▀▄  ▐█.▪▐▀▀▄ ▄█▀▀█ ██ ▄▄▐▀▀▪▄
+▐█▄▪▐█▐█▄▄▌▐█▌.▐▌ ▐█▌·▐█•█▌▐█ ▪▐▌▐███▌▐█▄▄▌
+·▀▀▀▀  ▀▀▀  ▀█▄▀▪ ▀▀▀ .▀  ▀ ▀  ▀ ·▀▀▀  ▀▀▀ 
 """
 
 
@@ -18,6 +19,7 @@ def print_logo():
 
 def get_user_url():
     print_logo()
+
     url = input("Enter URL/IP: ")
     return url
 
@@ -26,7 +28,7 @@ def main():
     site = get_user_url()
 
 
-    print_logo()
+    #print_logo()
 
     # Get target IP addr
     dest_ip = socket.gethostbyname(site)
