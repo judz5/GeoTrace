@@ -1,5 +1,7 @@
 # GeoTrace
 
+**THIS VERSION DOES NOT USE CURSES.**
+
 A Python traceroute tool with geolocation.
 
 Uses UDP packets with TTL (Time to live) values to trace the route to a destination address. Location data is pulled from ip-api.com, and (*in progess*) visualized on a map. 
@@ -12,7 +14,7 @@ Uses UDP packets with TTL (Time to live) values to trace the route to a destinat
 python Trace.py
 ```
 
-  the user is prompted for the target URL via curses. Traceroute output is printed, and a folium map is saved as 'traceMap.html' with a ping at each hopped location.
+  the user is prompted for the target URL via ~~curses~~ cli. Traceroute output is printed, and a folium map is saved as 'traceMap.html' with a ping at each hopped location.
 
 ## Example Output
 
